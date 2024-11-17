@@ -1,11 +1,15 @@
 # 3. Класс для управления корзиной покупок
 
+
 class ShoppingCart:
     """
     Класс, представляющий корзину покупок.
     """
-    def __init__(self):
+
+    def __init__(self, user, registrator):
         self.items = []
+        self.user = user
+        self.registrator = registrator
 
     def add_item(self, product, quantity):
         """
@@ -30,8 +34,10 @@ class ShoppingCart:
         """
         Возвращает детализированную информацию о содержимом корзины и общей стоимости.
         """
-        details = "Корзина покупок:\n"
+        details = f'Покупатель {self.user} приобрел:\n'
         for item in self.items:
-            details += f"{item['Продукт'].get_details()}, Количество: {item['количество']}\n"
-        details += f"Общее: {self.get_total()} руб"
+            details += f"- {item['Продукт'].get_details()}, Количество: {item['количество']}\n"
+        details += f"Общая сумма: {self.get_total()} руб\n"
+        details += f"Зарегистрировал покупки пользователь {self.registrator}"
+
         return details
